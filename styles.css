@@ -9,7 +9,11 @@
     --bg-soft: #f8fafc;
     --border: #e2e8f0;
     --card-bg: #ffffff;
-    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow: rgba(0, 0, 0, 0.06);
+    --shadow-medium: rgba(0, 0, 0, 0.08);
+    --shadow-large: rgba(0, 0, 0, 0.12);
+    --card-shadow: 0 4px 20px var(--shadow), 0 0 0 1px rgba(0, 0, 0, 0.03);
+    --hover-shadow: 0 8px 30px var(--shadow-large), 0 0 0 1px rgba(0, 0, 0, 0.03);
     --navbar-bg: rgba(255, 255, 255, 0.8);
     --gradient-1: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     --outline-color: var(--text-dark);
@@ -27,6 +31,10 @@
     --border: #334155;
     --card-bg: #1e293b;
     --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-medium: rgba(0, 0, 0, 0.4);
+    --shadow-large: rgba(0, 0, 0, 0.5);
+    --card-shadow: 0 4px 20px var(--shadow);
+    --hover-shadow: 0 8px 30px var(--shadow-large);
     --navbar-bg: rgba(15, 23, 42, 0.8);
     --outline-color: var(--text-dark);
 }
@@ -61,6 +69,7 @@ body {
     align-items: center;
     z-index: 1000;
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px var(--shadow);
 }
 
 .dark-mode .navbar {
@@ -285,7 +294,7 @@ body {
     width: 100%;
     height: auto;
     border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px var(--shadow-large), 0 0 0 1px rgba(0, 0, 0, 0.03);
 }
 
 .floating-card {
@@ -296,7 +305,7 @@ body {
     padding: 1rem 1.5rem;
     background: var(--card-bg);
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-shadow);
     animation: float 6s ease-in-out infinite;
     color: var(--text-dark);
     border: 1px solid var(--border);
@@ -439,7 +448,7 @@ section {
     background: var(--card-bg);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 20px var(--shadow);
+    box-shadow: var(--card-shadow);
     transition: all 0.3s ease;
     position: relative;
     border: 1px solid var(--border);
@@ -447,7 +456,7 @@ section {
 
 .project-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 30px var(--shadow);
+    box-shadow: var(--hover-shadow);
 }
 
 .project-image {
@@ -578,16 +587,17 @@ section {
     background-color: var(--card-bg);
     border-radius: 16px;
     border: 1px solid var(--border);
-    box-shadow: 0 4px 20px var(--shadow);
+    box-shadow: var(--card-shadow);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
+    animation: none; /* Remove default animation */
 }
 
 .skill-card.animate {
-    animation: skillCardFadeIn 0.6s ease forwards;
+    animation: skillCardPop 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
 }
 
 .skill-card::before {
@@ -608,7 +618,7 @@ section {
 
 .skill-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 30px var(--shadow);
+    box-shadow: var(--hover-shadow);
 }
 
 .skill-card i {
@@ -617,11 +627,11 @@ section {
     margin-bottom: 1rem;
     transition: all 0.3s ease;
     position: relative;
+    transform-origin: center;
 }
 
 .skill-card:hover i {
-    transform: scale(1.2) rotate(5deg);
-    color: var(--primary-dark);
+    animation: iconBounce 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
 .skill-card h3 {
@@ -632,15 +642,28 @@ section {
     position: relative;
 }
 
-/* Add new animations */
-@keyframes skillCardFadeIn {
-    from {
+/* Add new animations for skill cards */
+@keyframes skillCardPop {
+    0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px) scale(0.9);
     }
-    to {
+    60% {
+        transform: translateY(-10px) scale(1.05);
+    }
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Update the skill icon animations */
+@keyframes iconBounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2) rotate(10deg);
     }
 }
 
@@ -661,6 +684,7 @@ input, textarea {
     border-radius: 5px;
     background-color: var(--card-bg);
     color: var(--text-color);
+    box-shadow: 0 2px 8px var(--shadow);
 }
 
 textarea {
@@ -833,7 +857,7 @@ input, textarea {
 input:focus, textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1), 0 2px 8px var(--shadow);
 }
 
 /* Add fade-in animation class */
@@ -997,7 +1021,7 @@ body {
     max-width: 650px;
     height: auto;
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px var(--shadow-large), 0 0 0 1px rgba(0, 0, 0, 0.03);
 }
 
 .experience-badge {
@@ -1008,7 +1032,7 @@ body {
     color: white;
     padding: 1.5rem;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
     animation: float 6s ease-in-out infinite;
     animation-delay: 1s;
 }
@@ -1165,4 +1189,24 @@ body {
     .experience-badge .years {
         font-size: 2rem;
     }
+}
+
+/* Add subtle border to cards for better definition */
+.project-card, .skill-card {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .project-card,
+.dark-mode .skill-card {
+    border: 1px solid var(--border);
+}
+
+/* Add subtle background contrast */
+.projects, .skills {
+    background: linear-gradient(to bottom, var(--bg), var(--bg-soft));
+}
+
+.dark-mode .projects,
+.dark-mode .skills {
+    background: var(--bg);
 } 
