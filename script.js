@@ -174,4 +174,39 @@ document.querySelectorAll('.project-card').forEach(card => {
         card.style.setProperty('--x', `${x}px`);
         card.style.setProperty('--y', `${y}px`);
     });
+});
+
+// Skill cards animation
+const skillCards = document.querySelectorAll('.skill-card');
+
+const skillObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            // Add animation with delay based on index
+            setTimeout(() => {
+                entry.target.classList.add('animate');
+            }, index * 100); // 100ms delay between each card
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Observe each skill card
+skillCards.forEach(card => {
+    skillObserver.observe(card);
+});
+
+// Optional: Add hover animation for skill icons
+skillCards.forEach(card => {
+    const icon = card.querySelector('i');
+    
+    // Random rotation on hover
+    card.addEventListener('mouseenter', () => {
+        const rotation = Math.random() * 30 - 15; // Random rotation between -15 and 15 degrees
+        icon.style.transform = `scale(1.2) rotate(${rotation}deg)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        icon.style.transform = 'scale(1) rotate(0deg)';
+    });
 }); 
