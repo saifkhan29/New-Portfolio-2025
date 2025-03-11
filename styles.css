@@ -1317,9 +1317,9 @@ body {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
     position: relative;
@@ -1408,42 +1408,37 @@ body {
 }
 
 .service-features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.75rem;
-    position: relative;
+    margin-top: 0.5rem;
 }
 
 .service-features li {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    color: var(--text-dark);
-    font-size: 0.95rem;
-    padding: 0.5rem 0;
-    transition: transform 0.3s ease;
+    padding: 0.5rem 1rem;
+    background: var(--bg-soft);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    border: 1px solid var(--border);
 }
 
 .service-features li:hover {
-    transform: translateX(8px);
-    color: var(--primary);
+    transform: none;
+    background: var(--bg-soft);
+    color: var(--text-light);
+    border-color: var(--border);
+    box-shadow: none;
 }
 
-.service-features li i {
-    color: var(--primary);
-    font-size: 0.9rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    background: rgba(var(--primary-rgb), 0.1);
-    transition: all 0.3s ease;
+.service-card:hover .service-features li {
+    animation: none;
 }
 
-.service-card:hover .service-features li i {
-    background: var(--primary);
-    color: white;
+.service-features li {
+    animation-delay: 0s !important;
 }
 
 /* Update the animation for a more impactful entrance */
@@ -1476,13 +1471,16 @@ body {
 }
 
 /* Responsive adjustments */
+@media (max-width: 1400px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1000px;
+    }
+}
+
 @media (max-width: 768px) {
     .services-grid {
         grid-template-columns: 1fr;
-        padding: 0 1.5rem;
-    }
-    
-    .service-card {
-        padding: 2rem;
+        max-width: 500px;
     }
 } 

@@ -215,4 +215,11 @@ skillCards.forEach(card => {
     card.addEventListener('mouseleave', () => {
         icon.style.animation = 'none';
     });
+});
+
+// Add animation delay for service tags
+document.querySelectorAll('.service-features').forEach(list => {
+    list.querySelectorAll('li').forEach((tag, index) => {
+        tag.style.setProperty('--tag-index', index);
+    });
 }); 
