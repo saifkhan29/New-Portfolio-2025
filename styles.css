@@ -1483,4 +1483,69 @@ body {
         grid-template-columns: 1fr;
         max-width: 500px;
     }
+}
+
+/* Skills Section */
+.skills {
+    padding: 8rem 0;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    padding: 0 2rem;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.skill-item i {
+    font-size: 3.5rem;
+    transition: transform 0.3s ease;
+}
+
+.skill-item span {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* Brand Colors */
+.skill-item:has(.fa-html5) i { color: #E34F26; }
+.skill-item:has(.fa-css3-alt) i { color: #1572B6; }
+.skill-item:has(.fa-js) i { color: #F7DF1E; }
+.skill-item:has(.fa-react) i { color: #61DAFB; }
+.skill-item:has(.fa-sass) i { color: #CC6699; }
+.skill-item:has(.fa-node-js) i { color: #339933; }
+.skill-item:has(.fa-php) i { color: #777BB4; }
+.skill-item:has(.fa-git-alt) i { color: #F05032; }
+.skill-item:has(.fa-figma) i { color: #F24E1E; }
+.skill-item:has(.fa-wordpress) i { color: #21759B; }
+
+/* Simple hover effect */
+.skill-item:hover i {
+    transform: translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 2rem;
+    }
+
+    .skill-item i {
+        font-size: 3rem;
+    }
+
+    .skill-item span {
+        font-size: 0.9rem;
+    }
 } 
