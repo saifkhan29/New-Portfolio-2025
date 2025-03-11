@@ -29,14 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!document.querySelector('meta[name="theme-color"]')) {
         const meta = document.createElement('meta');
         meta.name = 'theme-color';
-        meta.content = '#ffffff';
+        meta.content = '#0f172a'; // Dark mode color
         document.head.appendChild(meta);
     }
 
+    // Set dark mode as default if no theme is saved
     const savedTheme = localStorage.getItem('darkMode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = savedTheme ? savedTheme === 'true' : prefersDark;
-    setTheme(isDark);
+    if (savedTheme === null) {
+        setTheme(true); // Force dark mode
+    } else {
+        setTheme(savedTheme === 'true');
+    }
 });
 
 // Listen for system theme changes
